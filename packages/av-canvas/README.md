@@ -1,5 +1,6 @@
 # AVCanvas
 
+修改于WebAV
 Combine Text, Image, Video, Audio, UserMedia, DisplayMedia to generate MediaStream.  
 With [AVRcorder](../av-recorder/README.md) you can output MP4 streams and save them as local files or push them to the server.
 

@@ -6,7 +6,7 @@ import {
   OffscreenSprite,
   Rect,
   VisibleSprite,
-} from '@webav/av-cliper';
+} from '@lhyzero/av-cliper';
 import { EventTool, throttle, workerTimer } from '@webav/internal-utils';
 import { renderCtrls } from './sprites/render-ctrl';
 import { ESpriteManagerEvt, SpriteManager } from './sprites/sprite-manager';

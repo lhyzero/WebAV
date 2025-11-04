@@ -1,5 +1,6 @@
 # AVCliper
 
+修改于WebAV
 WebCodecs-based, combine video, audio, images, text, with animation support
 基于 WebCodecs 合成 视频、音频、图片、文字，支持动画
 

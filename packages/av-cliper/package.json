@@ -1,8 +1,8 @@
 {
-  "name": "@webav/av-cliper",
-  "version": "1.2.7",
+  "name": "@lhyzero/av-cliper",
+  "version": "1.2.9",
   "private": false,
-  "repository": "https://github.com/WebAV-Tech/WebAV",
+  "repository": "https://github.com/lhyzero/WebAV",
   "keywords": [
     "webcodecs",
     "canvas",
@@ -40,7 +40,7 @@
     "dist"
   ],
   "dependencies": {
-    "@webav/internal-utils": "workspace:*",
+    "@webav/internal-utils": "^1.2.7",
     "@webav/mp4box.js": "^0.5.7",
     "opfs-tools": "^0.7.2",
     "wave-resampler": "^1.0.0"

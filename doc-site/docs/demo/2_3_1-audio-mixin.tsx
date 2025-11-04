@@ -1,4 +1,4 @@
-import { AudioClip, Combinator, OffscreenSprite } from '@webav/av-cliper';
+import { AudioClip, Combinator, OffscreenSprite } from '@lhyzero/av-cliper';
 import { useState } from 'react';
 import { CombinatorPlay } from './combinator-player';
 import { assetsPrefix } from './utils';

@@ -583,7 +583,9 @@ async function mp4FileToSamples(otFile: OPFSToolFile, opts: IMP4ClipOpts = {}) {
   };
 
   let videoDeltaTS = -1;
+  let videoCTS = -1;
   let audioDeltaTS = -1;
+  let audioCTS = -1;
   const reader = await otFile.createReader();
   await quickParseMP4File(
     reader,
@@ -630,14 +632,28 @@ async function mp4FileToSamples(otFile: OPFSToolFile, opts: IMP4ClipOpts = {}) {
     },
     (_, type, samples) => {
       if (type === 'video') {
-        if (videoDeltaTS === -1) videoDeltaTS = samples[0].dts;
+        if (videoDeltaTS === -1) {
+          videoDeltaTS = samples[0].dts;
+        }
+        if (videoCTS === -1) {
+          videoCTS = samples[0].cts;
+        }
         for (const s of samples) {
-          videoSamples.push(normalizeTimescale(s, videoDeltaTS, 'video'));
+          videoSamples.push(
+            normalizeTimescale(s, videoDeltaTS, videoCTS, 'video'),
+          );
         }
       } else if (type === 'audio' && opts.audio) {
-        if (audioDeltaTS === -1) audioDeltaTS = samples[0].dts;
+        if (audioDeltaTS === -1) {
+          audioDeltaTS = samples[0].dts;
+        }
+        if (audioCTS === -1) {
+          audioCTS = samples[0].cts;
+        }
         for (const s of samples) {
-          audioSamples.push(normalizeTimescale(s, audioDeltaTS, 'audio'));
+          audioSamples.push(
+            normalizeTimescale(s, audioDeltaTS, audioCTS, 'audio'),
+          );
         }
       }
     },
@@ -664,7 +680,8 @@ async function mp4FileToSamples(otFile: OPFSToolFile, opts: IMP4ClipOpts = {}) {
 
 function normalizeTimescale(
   s: MP4Sample,
-  delta = 0,
+  dtsDelta = 0,
+  ctsDelta = 0,
   sampleType: 'video' | 'audio',
 ) {
   // todo: perf 丢弃多余字段，小尺寸对象性能更好
@@ -687,8 +704,8 @@ function normalizeTimescale(
     is_idr: idrOffset >= 0,
     offset,
     size,
-    cts: ((s.cts - delta) / s.timescale) * 1e6,
-    dts: ((s.dts - delta) / s.timescale) * 1e6,
+    cts: ((s.cts - ctsDelta) / s.timescale) * 1e6,
+    dts: ((s.dts - dtsDelta) / s.timescale) * 1e6,
     duration: (s.duration / s.timescale) * 1e6,
     timescale: 1e6,
     // 音频数据量可控，直接保存在内存中
@@ -748,7 +765,7 @@ class VideoFrameFinder {
       // 弹出第一帧
       this.#videoFrames.shift();
       // 第一帧过期，找下一帧
-      if (time > vf.timestamp + (vf.duration ?? 0)) {
+      if (time >= vf.timestamp + (vf.duration ?? 0)) {
         vf.close();
         return await this.#parseFrame(time, dec, aborter);
       }
@@ -1337,7 +1354,7 @@ function splitVideoSampleByTime(videoSamples: ExtMP4Sample[], time: number) {
     .map((s) => ({ ...s }));
   for (let i = gopStartIdx; i < preSlice.length; i++) {
     const s = preSlice[i];
-    if (time < s.cts) {
+    if (time <= s.cts) {
       s.deleted = true;
       s.cts = -1;
     }
@@ -1364,8 +1381,8 @@ function splitAudioSampleByTime(audioSamples: ExtMP4Sample[], time: number) {
   let hitIdx = -1;
   for (let i = 0; i < audioSamples.length; i++) {
     const s = audioSamples[i];
-    if (time > s.cts) continue;
-    hitIdx = i;
+    if (time > s.cts) continue; //这修改一下，取不大于time的音频片段
+    hitIdx = i - 1;
     break;
   }
   if (hitIdx === -1) throw Error('Not found audio sample by time');
@@ -1580,7 +1597,7 @@ if (import.meta.vitest) {
       description: { type: 'avc1' },
       is_rap: false,
     };
-    const normalized = normalizeTimescale(s, 0, 'video');
+    const normalized = normalizeTimescale(s, 0, 0, 'video');
     expect(normalized.offset).toBe(48);
     expect(normalized.size).toBe(1000);
     expect(normalized.is_sync).toBe(normalized.is_idr);

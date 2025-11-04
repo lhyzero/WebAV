@@ -4,9 +4,9 @@ import {
   MP4Clip,
   OffscreenSprite,
   renderTxt2ImgBitmap,
-} from '@webav/av-cliper';
-import { useState } from 'react';
+} from '@lhyzero/av-cliper';
 import { Slider } from 'antd';
+import { useState } from 'react';
 import { CombinatorPlay } from './combinator-player';
 import { assetsPrefix } from './utils';
 

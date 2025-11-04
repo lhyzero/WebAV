@@ -42,7 +42,7 @@
     "@typescript/lib-dom": "npm:@types/web"
   },
   "dependencies": {
-    "@webav/av-cliper": "workspace:*",
+    "@lhyzero/av-cliper": "workspace:*",
     "@webav/internal-utils": "workspace:*"
   }
 }

@@ -9,7 +9,7 @@ order: 4
 
 # Video Clip
 
-The '@webav/av-canvas' package from the WebAV project provides quick implementation of **video clips** in the browser environment.
+The '@lhyzero/av-canvas' package from the WebAV project provides quick implementation of **video clips** in the browser environment.
 
 The DEMO demonstrates the basic capabilities of the video editing software.
 

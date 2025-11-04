@@ -1,18 +1,18 @@
-import { AVCanvas } from '@webav/av-canvas';
+import { AVCanvas } from '@lhyzero/av-canvas';
 import {
   AudioClip,
   ImgClip,
   MP4Clip,
   VisibleSprite,
   renderTxt2ImgBitmap,
-} from '@webav/av-cliper';
-import { Button, Radio } from 'antd';
+} from '@lhyzero/av-cliper';
 import {
   Timeline,
   TimelineAction,
   TimelineRow,
   TimelineState,
 } from '@xzdarcy/react-timeline-editor';
+import { Button, Radio } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { assetsPrefix, createFileWriter } from './utils';
 
@@ -370,7 +370,8 @@ export default function App() {
           if (avCvs == null || spr == null || tlState.current == null) return;
           const newClips = await spr
             .getClip()
-            .split?.(tlState.current.getTime() * 1e6 - spr.time.offset)!;
+            .split?.(70.87 * 1e6 - spr.time.offset)!;
+          console.log(newClips);
           // 移除原有对象
           avCvs.removeSprite(spr);
           actionSpriteMap.delete(action);

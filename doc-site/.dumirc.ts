@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: ['@umijs/plugins/dist/tailwindcss'],
   tailwindcss: {}, //在umi中，表示启用该插件
   alias: {
-    '@webav/av-cliper': path.resolve(
+    '@lhyzero/av-cliper': path.resolve(
       __dirname,
       '../packages/av-cliper/src/index.ts',
     ),
@@ -13,7 +13,7 @@ export default defineConfig({
       __dirname,
       '../packages/av-recorder/src/av-recorder.ts',
     ),
-    '@webav/av-canvas': path.resolve(
+    '@lhyzero/av-canvas': path.resolve(
       __dirname,
       '../packages/av-canvas/src/index.ts',
     ),

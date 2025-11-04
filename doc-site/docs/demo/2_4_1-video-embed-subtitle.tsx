@@ -1,9 +1,9 @@
 import {
-  MP4Clip,
-  EmbedSubtitlesClip,
   Combinator,
+  EmbedSubtitlesClip,
+  MP4Clip,
   OffscreenSprite,
-} from '@webav/av-cliper';
+} from '@lhyzero/av-cliper';
 import { useState } from 'react';
 import { CombinatorPlay } from './combinator-player';
 import { assetsPrefix } from './utils';

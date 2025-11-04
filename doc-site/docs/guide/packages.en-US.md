@@ -28,7 +28,7 @@ import {
   OffscreenSprite,
   renderTxt2ImgBitmap,
   Combinator,
-} from '@webav/av-cliper';
+} from '@lhyzero/av-cliper';
 
 const spr1 = new OffscreenSprite(
   new MP4Clip((await fetch('./video/bunny.mp4')).body),
@@ -81,8 +81,8 @@ import {
   MP4Clip,
   VisibleSprite,
   renderTxt2ImgBitmap,
-} from '@webav/av-cliper';
-import { AVCanvas } from '@webav/av-canvas';
+} from '@lhyzero/av-cliper';
+import { AVCanvas } from '@lhyzero/av-canvas';
 
 const avCvs = new AVCanvas(document.querySelector('#app'), {
   width: 1280,

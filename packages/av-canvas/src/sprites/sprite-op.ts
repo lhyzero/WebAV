@@ -1,4 +1,4 @@
-import { Rect } from '@webav/av-cliper';
+import { Rect } from '@lhyzero/av-cliper';
 import { debounce } from '@webav/internal-utils';
 import { CTRL_KEYS, ICvsRatio, IPoint, TCtrlKey } from '../types';
 import { createEl, getCvsRatio } from '../utils';

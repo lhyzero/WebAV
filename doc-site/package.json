@@ -25,8 +25,8 @@
     "tailwindcss": "^3.4.17"
   },
   "dependencies": {
-    "@webav/av-canvas": "workspace:*",
-    "@webav/av-cliper": "workspace:*",
+    "@lhyzero/av-canvas": "workspace:*",
+    "@lhyzero/av-cliper": "workspace:*",
     "@webav/av-recorder": "workspace:*",
     "@xzdarcy/react-timeline-editor": "^0.1.9",
     "antd": "^5.11.5"
